@@ -34,6 +34,13 @@
 				 <a href="delete/${user.id}">Delete</a></td>
 			</tr>
 		</c:forEach>
+	
 	</table>
+	<tr>
+		<td>
+		<a href="http://localhost:8084/HelloMVC/" class="button">Log Out</a>  
+				<a href="http://localhost:8084/HelloMVC/user" class="button">Add User</a> 
+	</td>
+	</tr>
 </body>
 </html>

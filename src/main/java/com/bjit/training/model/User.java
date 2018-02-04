@@ -26,21 +26,21 @@ public class User {
 	private String email;
 
 //	@NotEmpty(message = "Select gender.")
-	private int gender;
+	private String gender;
 	
 	@NotEmpty(message = "Give address.")
 	private String address;
 	
 
 //	@NotEmpty(message = "Give role.")
-	private int role;
+	private String role;
 	
 	
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
@@ -84,11 +84,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

@@ -12,8 +12,7 @@
 }
 </style>
 <P>
-	<b>${message}</b>
-	<b></b>
+	
 </P>
 
 </head>
@@ -51,15 +50,15 @@
 			</tr>
 			<tr>
 				<th>Gender</th>
-				<td><form:radiobutton path="gender" value="1" label="Male" />
-					<form:radiobutton path="gender" value="2" label="Female" /> <form:errors
+				<td><form:radiobutton path="gender" value="Male" label="Male" />
+					<form:radiobutton path="gender" value="Female" label="Female" /> <form:errors
 						path="gender" cssClass="error" /></td>
 			</tr>
 
 			<tr>
 				<th>Role</th>
-				<td><form:radiobutton path="role" value="1" label="Admin" /> <form:radiobutton
-						path="role" value="2" label="User" /> <form:errors path="role"
+				<td><form:radiobutton path="role" value="Admin" label="Admin" /> <form:radiobutton
+						path="role" value="User" label="User" /> <form:errors path="role"
 						cssClass="error" /></td>
 			</tr>
 
