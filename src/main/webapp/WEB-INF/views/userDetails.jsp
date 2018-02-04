@@ -38,7 +38,7 @@
 	</table>
 	<tr>
 		<td>
-		<a href="http://localhost:8084/HelloMVC/" class="button">Log Out</a>  
+		<a href="http://localhost:8084/HelloMVC/logout" class="button">Log Out</a>  
 				<a href="http://localhost:8084/HelloMVC/user" class="button">Add User</a> 
 	</td>
 	</tr>

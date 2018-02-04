@@ -1,24 +1,19 @@
 package com.bjit.training;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bjit.training.configaration.AppConfig;
 import com.bjit.training.dao.UserDAO;
 import com.bjit.training.dao.UserDAOImpl;
-import com.bjit.training.model.LogIn;
 import com.bjit.training.model.User;
 
 @Controller
@@ -35,12 +30,25 @@ public class LoginController {
 	public User setUpStudentForm1() {
 		return new User();
 	}
-
-	@GetMapping("/login")
-	public String login(Model model) {
+	
+//	@GetMapping("/")
+//	public ModelAndView home() {
+//		return new ModelAndView("redirect:/login");	
+//	}
+	
+	@GetMapping(value= {"/", "/login"})
+	public ModelAndView login(@ModelAttribute("user") User user) {
 		// model.addAttribute("logIn", new LogIn());
-
-		return "login";
+		ModelAndView modelAndView = new ModelAndView();
+		if(user != null && user.getEmail() != null) {
+			System.out.println(user.getEmail());
+			return new ModelAndView("redirect:/details");			
+		}else {
+			modelAndView.setViewName("login");
+		}
+		
+		
+		return modelAndView;
 	}
 
 	@PostMapping("/dologin")
@@ -48,8 +56,6 @@ public class LoginController {
 		// Implement your business logic
 		User u = userDAO.getSpecificUserByEmail(user.getEmail(), user.getPassword());
 		// userLogedin = u;
-		System.out.println(u.getName() + "from do login ");
-		System.out.println(u.getGender() + "role from do login ");
 		// int role = u.getRole();
 
 		if (u != null && user.getPassword().equals(u.getPassword())) {
@@ -65,17 +71,8 @@ public class LoginController {
 			user.setRole(u.getRole());
 			user.setAddress(u.getAddress());
 			System.out.println(user);
-			if (u.getRole().equals("Admin")) {
-				ModelAndView modelAndView = new ModelAndView();
-				modelAndView.addObject("user", u);
-				modelAndView.setViewName("welcomeAdmin");
-				return modelAndView;
-			} else {
-				ModelAndView modelAndView = new ModelAndView();
-				modelAndView.addObject("user", user);
-				modelAndView.setViewName("userSessionInfo");
-				return modelAndView;
-			}
+			return new ModelAndView("redirect:/details");
+			
 		} else {
 			model.addAttribute("message", "Email or password incorrect. Try again.");
 			// return "login";
@@ -83,9 +80,28 @@ public class LoginController {
 		return new ModelAndView("redirect:/login");
 	}
 	
+	@GetMapping("/details")
+	public ModelAndView getDetails(@ModelAttribute("user") User user) {
+		if(user == null || user.getEmail() == null) {
+			return new ModelAndView("redirect:/login");
+		}
+		
+		if (user.getRole().equals("Admin")) {
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.addObject("user", user);
+			modelAndView.setViewName("welcomeAdmin");
+			return modelAndView;
+		} else {
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.addObject("user", user);
+			modelAndView.setViewName("userSessionInfo");
+			return modelAndView;
+		}
+	}
+	
 	@GetMapping("/logout")
-	public String logout(@ModelAttribute("user") User user) {
-		user = null;
-		return "login";
+	public ModelAndView logout(ModelMap model) {
+		model.clear();
+		return new ModelAndView("redirect:/login");
 	}
 }
