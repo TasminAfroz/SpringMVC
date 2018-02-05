@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <title>BJIT</title>
 <style type="text/css">
 .error {
@@ -27,7 +29,7 @@
 
 
 				<td><form:input hidden="true" path="id" type="text"
-						required="true" /> <form:errors path="id" cssClass="error" /></td>
+						required="true" class="form_control" /> <form:errors path="id" cssClass="error" /></td>
 			</tr>
 
 			<tr>
@@ -71,7 +73,7 @@
 			</tr>
 
 			<tr>
-		<td><a href="http://localhost:8082/HelloMVC/" class="button">Log Out</a></td>
+		<td><a href="http://localhost:8081/HelloMVC/logout" class="button">Log Out</a></td>
 			
 
 

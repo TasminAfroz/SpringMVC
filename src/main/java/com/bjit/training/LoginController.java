@@ -1,5 +1,7 @@
 package com.bjit.training;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bjit.training.configaration.AppConfig;
 import com.bjit.training.dao.UserDAO;
@@ -42,7 +45,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		if(user != null && user.getEmail() != null) {
 			System.out.println(user.getEmail());
-			return new ModelAndView("redirect:/details");			
+//			return new ModelAndView("redirect:/login");			
 		}else {
 			modelAndView.setViewName("login");
 		}
@@ -52,12 +55,13 @@ public class LoginController {
 	}
 
 	@PostMapping("/dologin")
-	public ModelAndView doLogin(@ModelAttribute("user") User user, BindingResult result, Model model) {
+	public ModelAndView doLogin(@ModelAttribute("user") User user, BindingResult result, Model model, RedirectAttributes attributes) {
 		// Implement your business logic
 		User u = userDAO.getSpecificUserByEmail(user.getEmail(), user.getPassword());
 		// userLogedin = u;
 		// int role = u.getRole();
-
+//HttpSession session;
+//System.out.println("Session name"+ session.);
 		if (u != null && user.getPassword().equals(u.getPassword())) {
 			// // Set student dummy data
 			//// System.out.println(user);
@@ -74,7 +78,9 @@ public class LoginController {
 			return new ModelAndView("redirect:/details");
 			
 		} else {
-			model.addAttribute("message", "Email or password incorrect. Try again.");
+//			model.addAttribute("message", "Email or password incorrect. Try again.");
+			
+			attributes.addFlashAttribute("message", "Email or password incorrect. Try again.");
 			// return "login";
 		}
 		return new ModelAndView("redirect:/login");
@@ -98,10 +104,26 @@ public class LoginController {
 			return modelAndView;
 		}
 	}
+//	
+//	@GetMapping("/logout")
+//	public ModelAndView logout(ModelMap model,HttpSession session) {
+//		session.invalidate();
+//		model.clear();
+//		return new ModelAndView("redirect:/login");
+//	}
+////	
+//	@GetMapping("/logout")
+//	public String logout(@ModelAttribute("user") User user) {
+//		user = null;
+//		return "login";
+//}
+	
 	
 	@GetMapping("/logout")
-	public ModelAndView logout(ModelMap model) {
-		model.clear();
-		return new ModelAndView("redirect:/login");
+	public String showLoggedOut(@ModelAttribute("user") User user, HttpSession session) {
+		session.removeAttribute("user");
+		session.invalidate();
+//		session.invalidate();
+		return "login";
 	}
 }

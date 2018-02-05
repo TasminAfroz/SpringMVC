@@ -19,7 +19,7 @@
 <body>
 
 	<hr />
-	<form:form action="http://localhost:8082/HelloMVC/saveUser"
+	<form:form action="http://localhost:8081/HelloMVC/saveUser"
 		method="post" modelAttribute="user">
 		<table>
 
@@ -71,9 +71,9 @@
 			</tr>
 
 			<tr>
-				<td><a href="http://localhost:8082/HelloMVC/" class="button">Log Out</a>  
-				<a href="http://localhost:8082/HelloMVC/user" class="button">Add New</a> 
-				<a href="http://localhost:8082/HelloMVC/usersDetails" class="button">User Details</a></td>
+				<td><a href="http://localhost:8081/HelloMVC/logout" class="button">Log Out</a>  
+				<a href="http://localhost:8081/HelloMVC/user" class="button">Add New</a> 
+				<a href="http://localhost:8081/HelloMVC/usersDetails" class="button">User Details</a></td>
 
 
 

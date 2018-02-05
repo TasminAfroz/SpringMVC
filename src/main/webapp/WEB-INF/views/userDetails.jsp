@@ -11,7 +11,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>	<h3>List of Users</h3>
-	<table class="table table-bordered" style="width: 300px">
+	<table class="table table-bordered" >
 		<tr>
 			<th>Id</th>
 			<th>Name</th>
@@ -38,8 +38,8 @@
 	</table>
 	<tr>
 		<td>
-		<a href="http://localhost:8084/HelloMVC/logout" class="button">Log Out</a>  
-				<a href="http://localhost:8084/HelloMVC/user" class="button">Add User</a> 
+		<a href="http://localhost:8081/HelloMVC/logout" class="button">Log Out</a>  
+				<a href="http://localhost:8081/HelloMVC/user" class="button">Add User</a> 
 	</td>
 	</tr>
 </body>

@@ -70,7 +70,7 @@ public class UserController {
 	  @RequestMapping(value = "/edit/{id}")
 	    public ModelAndView editUser(@ModelAttribute("user") User user,@PathVariable("id") int id)
 	    {
-	        ModelAndView model = new ModelAndView("userDetails");
+	        ModelAndView model = new ModelAndView("");
 	        System.out.println(id);
 	        
 	        user = userDAO.getSpecificUser(id);
@@ -79,7 +79,7 @@ public class UserController {
 //	        model.addObject("userList",userList);
 	        
 	        model.addObject("user",user);
-	        model.setViewName("userForm");
+	        model.setViewName("userEdit");
 	        
 	        return model;
 	    }
